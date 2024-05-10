@@ -41,8 +41,8 @@ class BookDao(
     override fun update(book: Book): Book? {
         val sql = "UPDATE BOOKS SET name = ?, author = ?, publicyear = ?, tematic = ? WHERE id = ?"
         return try {
-            DataBase.getConnection().use { conn ->
-         //   dataSource.connection.use { conn ->
+         //   DataBase.getConnection().use { conn ->
+            dataSource.connection.use { conn ->
                 conn.prepareStatement(sql).use { stmt ->
                     stmt.setString(1, book.name)
                     stmt.setString(2, book.author)
@@ -68,8 +68,8 @@ class BookDao(
     override fun deleteById(id: String):Boolean {
         val sql = "DELETE FROM BOOKS WHERE id = ?"
         return try{
-            DataBase.getConnection().use { conn ->
-      //      dataSource.connection.use { conn ->
+    //        DataBase.getConnection().use { conn ->
+            dataSource.connection.use { conn ->
                 conn.prepareStatement(sql).use { stmt ->
                     stmt.setString(1, id.toString())
                     return (stmt.executeUpdate() == 1)
@@ -85,8 +85,8 @@ class BookDao(
     override fun selectById(id: String): Book? {
         val sql = "SELECT * FROM BOOKS WHERE id = ?"
         return try{
-            DataBase.getConnection().use { conn ->
-          //  dataSource.connection.use { conn ->
+         //   DataBase.getConnection().use { conn ->
+            dataSource.connection.use { conn ->
                 conn.prepareStatement(sql).use { stmt ->
                     stmt.setString(1, id.toString())
                     val rs = stmt.executeQuery()
@@ -112,8 +112,8 @@ class BookDao(
     override fun getAll(): List<Book>? {
         val sql = "SELECT * FROM BOOKS"
         return try {
-            DataBase.getConnection().use { conn ->
-          //  dataSource.connection.use { conn ->
+            //DataBase.getConnection().use { conn ->
+            dataSource.connection.use { conn ->
                 conn.prepareStatement(sql).use { stmt ->
                     val rs = stmt.executeQuery()
                     val books = mutableListOf<Book>()
