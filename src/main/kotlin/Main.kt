@@ -9,16 +9,16 @@ fun main() {
 
     val dataSource = DataSourceFactory.getDS(DataSourceFactory.DataSourceType.HIKARI)
 
-    // Creamos la instancia de UserDAO
+    // Creamos la instancia de bookDAO
     val bookDao = BookDao(dataSource,console)
 
-    // Creamos la instancia de UserService
+    // Creamos la instancia de bookService
     val bookService = BookServiceImpl(bookDao)
 
     // Creamos un nuevo usuario
     val newBook = Book(name = "Como subir de hierro", author = "Riot Games", publicYear = "2024", tematic = "Informativo")
     var createdBook = bookService.insertBook(newBook)
-    console.showMessage("Created user: ${createdBook ?: "Error"}")
+    console.showMessage("Created book: ${createdBook ?: "Error"}")
 
     // Obtenemos un usuario por su ID
     val foundBook =
@@ -27,7 +27,7 @@ fun main() {
         } else {
             null
         }
-    console.showMessage("Found user: ${foundBook ?: "Error"}")
+    console.showMessage("Found book: ${foundBook ?: "Error"}")
 
     // Actualizamos el usuario
     val updatedBook = foundBook?.copy(name = "Como subir de bronze")
@@ -37,11 +37,11 @@ fun main() {
         }else {
             null
         }
-    console.showMessage("Updated user: ${savedBook?: "Error"}")
+    console.showMessage("Updated book: ${savedBook?: "Error"}")
 
     val otherBook = Book(name = "Hello World", author = "Maria Gomez", publicYear = "2024", tematic = "Informativo")
     createdBook = bookService.insertBook( otherBook )
-    console.showMessage("Created user: ${createdBook?: "Error"}")
+    console.showMessage("Created book: ${createdBook?: "Error"}")
 
 
     // Obtenemos todos los usuarios
@@ -50,8 +50,8 @@ fun main() {
 
     // Eliminamos el usuario
     if (savedBook != null) {
-        if (bookService.deleteById(savedBook.id))console.showMessage("User delete OK!")
-        else console.showMessage("User delete not OK ._.")
+        if (bookService.deleteById(savedBook.id))console.showMessage("book delete OK!")
+        else console.showMessage("book delete not OK ._.")
     }
 
     // Obtenemos todos los usuarios
@@ -60,8 +60,8 @@ fun main() {
 
     // Eliminamos el usuario
     if (savedBook != null) {
-        if (bookDao.deleteById(savedBook.id))console.showMessage("User delete OK!")
-        else console.showMessage("User delete not OK ._.")
+        if (bookDao.deleteById(savedBook.id))console.showMessage("book delete OK!")
+        else console.showMessage("book delete not OK ._.")
     }
     // Obtenemos todos los usuarios
     allBooks = bookService.getAll()
