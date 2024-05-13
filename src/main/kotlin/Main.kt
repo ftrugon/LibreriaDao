@@ -17,13 +17,13 @@ fun main() {
 
     // Creamos un nuevo usuario
     val newBook = Book(name = "Como subir de hierro", author = "Riot Games", publicYear = "2024", tematic = "Informativo")
-    var createdBook = bookService.insertBook(newBook)
+    var createdBook = bookService.create(newBook)
     console.showMessage("Created book: ${createdBook ?: "Error"}")
 
     // Obtenemos un usuario por su ID
     val foundBook =
         if (createdBook != null) {
-            bookService.selectById(createdBook.id)
+            bookService.getById(createdBook.id)
         } else {
             null
         }
@@ -40,7 +40,7 @@ fun main() {
     console.showMessage("Updated book: ${savedBook?: "Error"}")
 
     val otherBook = Book(name = "Hello World", author = "Maria Gomez", publicYear = "2024", tematic = "Informativo")
-    createdBook = bookService.insertBook( otherBook )
+    createdBook = bookService.create( otherBook )
     console.showMessage("Created book: ${createdBook?: "Error"}")
 
 
@@ -50,7 +50,7 @@ fun main() {
 
     // Eliminamos el usuario
     if (savedBook != null) {
-        if (bookService.deleteById(savedBook.id))console.showMessage("book delete OK!")
+        if (bookService.delete(savedBook.id))console.showMessage("book delete OK!")
         else console.showMessage("book delete not OK ._.")
     }
 

@@ -3,13 +3,13 @@ package service
 import Book
 import dao.IBookDao
 
-class BookServiceImpl(private val bookDao: IBookDao) : IBookDao {
+class BookServiceImpl(private val bookDao: IBookDao) : IBookService {
 
-    override fun insertBook(book: Book): Book? {
+    override fun create(book: Book): Book? {
         return bookDao.insertBook(book)
     }
 
-    override fun deleteById(id: String): Boolean {
+    override fun delete(id: String): Boolean {
         return bookDao.deleteById(id)
     }
 
@@ -17,7 +17,7 @@ class BookServiceImpl(private val bookDao: IBookDao) : IBookDao {
         return bookDao.update(book)
     }
 
-    override fun selectById(id: String): Book? {
+    override fun getById(id: String): Book?{
         return bookDao.selectById(id)
     }
 
